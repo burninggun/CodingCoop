@@ -1,12 +1,12 @@
 const passport = require ('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 const User = require('../models/users')
-
+const keys = require('./keys.js')
 
 passport.use(new GitHubStrategy({
-    clientID: '8fa59b3a6a90a8734cee',
-    clientSecret: '76684482693af5b5e27429390647f71f740896bb',
-    callbackURL: "http://localhost:3000/auth/callback"
+    clientID: keys.github_strategy.clientID,
+    clientSecret: keys.github_strategy.client_secret,
+    callbackURL: keys.github_strategy.callbackURL
     },(accessToken, refreshToken, profile, done) => {
         //check if user already exists
         User.findOne({githubId:profile.id}).then( currentUser => {
