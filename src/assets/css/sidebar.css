@@ -3,7 +3,8 @@
     .sidebar{
         transform: translateX(-100%);
         transition: .5s;
-        width:35%;
+        min-width:35%;
+        width: 40%;
         top: 0px;
         z-index:1030;
         background-color:#fff;
