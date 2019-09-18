@@ -24,3 +24,7 @@
 .thread-mobile{
     padding: 0 5% 0 5% !important
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}

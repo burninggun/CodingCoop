@@ -19,10 +19,6 @@ const commentSchema = new mongoose.Schema({
     commentRatedUsers:[commentUserRatingSchema]
 })
 
-
-
-
-
 var PostSchema = new mongoose.Schema({
     author: {type:String},
     title: {type: String},

@@ -3,6 +3,7 @@ import MinimizedThread from './minimizedThread/minimizedThread';
 import FilterFeed from './filterFeed';
 import axios from 'axios';
 import '../assets/css/app.css'
+import { Link } from 'react-router-dom'
 class AllThreads extends Component {
     constructor(props){
         super(props);
@@ -35,11 +36,22 @@ class AllThreads extends Component {
     } 
 
     render(){
-        const threads = this.state.postData.map((item, index) => {
+        let threads = this.state.postData.map((item, index) => {
             return (
                 <MinimizedThread data={item} key={index}/>
             )
         });
+        if( this.state.postData.length === 0){
+            threads = <div className="text-center my-4 border bg-white" >
+                <div  className="py-5">
+                    <h5>
+                        There are currently no posts! Be there first!
+                    </h5>
+                        <Link to="/newPost" >Post a question</Link>
+                </div>
+
+            </div>
+        }
         return (
             <div className="col-sm-12 col-md-10 mt-md-4 offset-md-2 pl-md-5 ">
                 {/* <div className="row justify-content-end">
