@@ -3,6 +3,7 @@ import axios from 'axios'
 import UpvoteComments from '../upvotecomments';
 import Comments from '../comments';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom';
 
 const textAreaStyle={
     fontSize: '13px',
@@ -107,7 +108,7 @@ class Thread extends Component{
             return (
                 <div className="jumbotron">
                     <h3 className="display text-center">Sign in to comment!</h3>
-                    <p className="text-center">Sign in with GitHub to get the full CodingCoops experience</p>
+                    <p className="text-center"> <a href="/auth/github">Sign in with GitHub</a> to get the full CodingCoops experience</p>
                 </div>
             )
         } else {
@@ -124,12 +125,12 @@ class Thread extends Component{
 
     render(){
         
-
+        console.log(this.state);
         return(
             
                 <div className="col-m-10 col-sm-10 justify-content-start pt-5 bg-white offset-md-2 pl-5 ">
                     <h2>{this.state.title}</h2>
-                    <p><small className='text-muted' >Author: no one </small></p>
+                    <p><small className="text-muted" > {this.state.data.res.author} - Posted: {new Date(this.state.data.res.timestamp).toString()} </small></p>
                     <p>{this.state.description}</p>
                    
                     <div className="dropdown-divider mb-5"></div>
