@@ -31,7 +31,7 @@
     "cookie-session": "^2.0.0-beta.3",
     "express-session": "^1.15.6",
     "mongoose": "^5.0.17",
-    "npm": "^5.8.0",
+    "npm": "^6.13.4",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "react": "^16.2.0",
