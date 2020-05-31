@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const passport = require('passport')
+const passport = require('passport');
+const Users = require('../models/users')
 
 router.get('/check', (req, res)=> {
     let authenticated = null;
@@ -14,6 +15,33 @@ router.get('/check', (req, res)=> {
     res.send({authenticated});
 });
 
+router.post('/register', (req, res, next) => {
+    const { email, password, name } = req.body
+    Users.findOne({login: email}).then(currentUser => {
+        if(currentUser){
+            return res.send({success: false})
+        } else {
+            passport.authenticate('local-signup', (err, user, info) => {
+                req.login(user, err => {
+                    return res.send({ success: req.isAuthenticated() })
+                })
+            })(req, res, next)
+        }
+    })
+
+})
+
+router.post('/login', (req, res, next) => {
+	passport.authenticate('local-login', (err, user, info) => {
+		if (err) return next(err);
+		if (!user) return res.send({ success: req.isAuthenticated() });
+		req.logIn(user, err => {
+			if(err) return next(err);
+			return 	res.send({ success: req.isAuthenticated() });
+
+		})
+	})(req, res, next)
+})
 
 router.get('/github', passport.authenticate('github'));
 

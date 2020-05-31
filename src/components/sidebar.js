@@ -18,7 +18,6 @@ class Sidebar extends Component{
 	}
 	sidebarCheck(){
 		if(window.innerWidth < 768){
-			console.log('lol')
 			this.setState({
 				expand: {transform: "translateX(0)"},
 				backdrop: {display:'block'}
@@ -56,7 +55,7 @@ class Sidebar extends Component{
 					<NavLink onClick={this.closeSidebar} className="nav-link font-weight-bold" to="/home/newest" activeClassName="active">Newest</NavLink>
 					<NavLink onClick={this.closeSidebar} className="nav-link font-weight-bold" to="/home/oldest" activeClassName="active">Oldest</NavLink>
 					<NavLink onClick={this.closeSidebar} className="nav-link font-weight-bold" to="/leaderboard" activeClassName="active">Leaderboards</NavLink>
-					<NavLink onClick={this.closeSidebar} className="nav-link font-weight-bold" to="/aboutus" activeClassName="active">About Us</NavLink>
+					{/* <NavLink onClick={this.closeSidebar} className="nav-link font-weight-bold" to="/aboutus" activeClassName="active">About Us</NavLink> */}
 				</nav>
 				<div onClick={this.closeSidebar} style={this.state.backdrop} className="backdrop"></div>
 			</div>

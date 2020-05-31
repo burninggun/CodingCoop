@@ -12,12 +12,12 @@ import Sidebar from './sidebar';
 import Thread from './UniqueThread/uniqueThread';
 import AllThreads from './allthreads';
 import Leaderboard from './leaderboard';
-import Register from './account/register';
+// import Register from './account/register';
 import AboutUs from './aboutus';
 import Home from './home';
 import Profile from './profile'
-
-
+import Login from './Auth/login'
+import Signup from './Auth/signup'
 
 const UniqueThread = ({ match }) => {
     return(
@@ -58,8 +58,9 @@ class App extends Component {
                         <Route path='/newPost' component={NewPost}/>
                         <Route path='/thread/:threadID' component={UniqueThread}  />
                         <Route path='/leaderboard' component={Leaderboard} />
-                        <Route path="/register" component={Register}/>
-                        <Route path="/aboutus" component={AboutUs}/>
+                        <Route path="/register" component={Signup}/>
+                        {/* <Route path="/aboutus" component={AboutUs}/> */}
+                        <Route path="/login" component={Login} />
                     </Switch>                    
                     
                     </div>

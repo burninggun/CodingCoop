@@ -38,7 +38,7 @@ class AllThreads extends Component {
     render(){
         let threads = this.state.postData.map((item, index) => {
             return (
-                <MinimizedThread data={item} key={index}/>
+                <MinimizedThread data={item} key={index + item._id}/>
             )
         });
         if( this.state.postData.length === 0){
