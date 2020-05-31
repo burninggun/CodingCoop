@@ -34,15 +34,16 @@ router.post('/comment/add', isAuth, (req, res) => {
     PostModel.findById(req.body.threadID , (err, data) => {
         if(err) throw err;
         data.comments.push( {
-            name: req.body.user.name, 
+            name: req.user.name, 
             'comment': req.body.comment,
             'rating': 0,
             commentRatedUsers: []
         });
         data.save(err=>{
             if(err) throw err;
+            res.send(data);
+
         });
-        res.send(data);
     } )
 })
 

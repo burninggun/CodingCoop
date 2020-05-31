@@ -22,11 +22,7 @@ class Thread extends Component{
     constructor(props){
         super(props)
         this.state={
-            data:{
-                res:{
-                    comments:[]
-                }
-            },
+            comments:[],
             textInput:'',
             description:'',
             title: '' ,
@@ -39,13 +35,11 @@ class Thread extends Component{
     }
     componentWillMount(){
         axios.post(`/posts/unique-thread`, { threadID: this.props.threadID } ).then( res => {
-            const newData=this.state.data;
-            newData.res=res.data
+            console.log(res.data);
+            const { ...rest } = res.data
             this.setState({
-                data:newData,
-                description: res.data.description,
-                title: res.data.title,
-                jsbin:res.data.jsbin
+                ...this.state,
+                ...rest
                 })
                 
         })
@@ -58,15 +52,15 @@ class Thread extends Component{
         if (this.validCheck(this.state.textInput)){
 
             const submittedComment={
-                user: res.data,
                 comment:this.state.textInput,
                 threadID: this.props.threadID
                 }
             axios.post(`/comment/add`, submittedComment).then( res => {
-                const newData=this.state.data
-                newData.res.comments=res.data.comments
+                console.log(res.data);
+
                 this.setState({
-                    data:newData,
+                    ...this.state,
+                    ...res.data,
                     textInput:'',
                 })
             })
@@ -130,11 +124,11 @@ class Thread extends Component{
             
                 <div className="col-m-10 col-sm-10 justify-content-start pt-5 bg-white offset-md-2 pl-5 ">
                     <h2>{this.state.title}</h2>
-                    <p><small className="text-muted" > {this.state.data.res.author} - Posted: {new Date(this.state.data.res.timestamp).toString()} </small></p>
+                    <p><small className="text-muted" > {this.state.author} - Posted: {new Date(this.state.timestamp).toString()} </small></p>
                     <p>{this.state.description}</p>
                    
                     <div className="dropdown-divider mb-5"></div>
-                    <Comments threadID={this.state.threadID} data={this.state.data.res} />
+                    <Comments threadID={this.state.threadID} data={this.state} />
                     {this.authForm()}
                 </div>
         )
@@ -143,6 +137,7 @@ class Thread extends Component{
 
 function mapStateToProps(state){
     return{
+        user: state.user,
         auth: state.user.auth
     }
 }
